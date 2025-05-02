@@ -3,6 +3,8 @@ package com.example.bookstore.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="books")
 @Data
@@ -31,4 +33,12 @@ public class Book {
 
     @Column
     private Integer stock;
+
+    @ManyToMany
+    @JoinTable(
+            name = "book_genre",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "genre_id")
+    )
+    private List<Genre> genres;
 }
