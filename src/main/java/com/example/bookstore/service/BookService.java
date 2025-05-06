@@ -21,13 +21,13 @@ public class BookService {
         return bookRepository.findAll();
     }
 
-    public Book getBooksById(Long id){
+    public Book getBookById(Long id){
         return bookRepository.findById(id)
                 .orElseThrow(()->new RuntimeException("The book was not found"));
     }
 
     public Book updateBook(Long id, Book updateBook){
-        Book existing=getBooksById(id);
+        Book existing=getBookById(id);
         existing.setTitle(updateBook.getTitle());
         existing.setGenre(updateBook.getGenre());
         existing.setAuthor(updateBook.getAuthor());
