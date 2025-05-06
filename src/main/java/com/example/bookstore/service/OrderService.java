@@ -1,5 +1,6 @@
 package com.example.bookstore.service;
 
+import com.example.bookstore.model.Author;
 import com.example.bookstore.model.Order;
 import com.example.bookstore.model.OrderItem;
 import com.example.bookstore.repository.OrderRepository;
@@ -38,5 +39,19 @@ public class OrderService {
     public Order getOrderById(Long id) {
         return orderRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("The order was not found"));
+    }
+
+    public Order updateOrder(Long id, Order updateOrder){
+        Order existing=getOrderById(id);
+        existing.setCustomer(updateOrder.getCustomer());
+        existing.setOrderDate(updateOrder.getOrderDate());
+        existing.setItems(updateOrder.getItems());
+        existing.setTotalAmount(updateOrder.getTotalAmount());
+
+        return orderRepository.save(existing);
+    }
+
+    public void deleteOrder(Long id){
+        orderRepository.deleteById(id);
     }
 }
