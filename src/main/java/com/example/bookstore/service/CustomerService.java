@@ -14,10 +14,12 @@ public class CustomerService {
     private CustomerRepository customerRepository;
 
     public Customer createCustomer(Customer customer){
-       return customerRepository.save(customer);
+
+        return customerRepository.save(customer);
     }
 
     public List<Customer> getAllCustomers(){
+
         return customerRepository.findAll();
     }
 
