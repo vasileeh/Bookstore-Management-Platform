@@ -10,13 +10,13 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class GenreService {
-    private GenreRepository genreRepository;
+    private final GenreRepository genreRepository;
 
-    private Genre createGenre(Genre genre){
+    public Genre createGenre(Genre genre){
         return genreRepository.save(genre);
     }
 
-    public List<Genre> getAllGneres(){
+    public List<Genre> getAllGenres(){
         return genreRepository.findAll();
     }
 

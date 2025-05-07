@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class OrderService {
 
-    private  OrderRepository orderRepository;
+    private final OrderRepository orderRepository;
 
     public Order createOrder(Order order) {
         order.setOrderDate(LocalDateTime.now());

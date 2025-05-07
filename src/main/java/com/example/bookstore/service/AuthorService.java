@@ -11,7 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class AuthorService {
 
-    private AuthorRepository authorRepository;
+    private final AuthorRepository authorRepository;
 
     public Author createAuthor(Author author){
         return authorRepository.save(author);

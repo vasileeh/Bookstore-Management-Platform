@@ -11,7 +11,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BookService {
 
-    private BookRepository bookRepository;
+    private final BookRepository bookRepository;
 
     public Book createBook(Book book){
         return bookRepository.save(book);
