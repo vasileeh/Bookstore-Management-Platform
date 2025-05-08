@@ -6,13 +6,15 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Table(name="books")
-@Data
+@Table(name = "books")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
+@ToString(exclude = {"author", "genres", "genre"})
 public class Book {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -21,11 +23,11 @@ public class Book {
     private String title;
 
     @ManyToOne
-    @JoinColumn(name="author_id", nullable = false)
+    @JoinColumn(name = "author_id", nullable = false)
     private Author author;
 
     @ManyToOne
-    @JoinColumn(name="genre_id", nullable = false)
+    @JoinColumn(name = "genre_id", nullable = false)
     private Genre genre;
 
     @Column(nullable = false)

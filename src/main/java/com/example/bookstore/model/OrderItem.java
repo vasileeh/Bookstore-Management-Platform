@@ -1,18 +1,20 @@
 package com.example.bookstore.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
+@ToString(exclude = {"order", "book"})
 public class OrderItem {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private int quantity;
@@ -20,10 +22,11 @@ public class OrderItem {
     private double price;
 
     @ManyToOne
-    @JoinColumn(name="order_id", nullable = false)
+    @JoinColumn(name = "order_id", nullable = false)
+    @JsonIgnore
     private Order order;
 
     @ManyToOne
-    @JoinColumn(name="book_id", nullable = false)
+    @JoinColumn(name = "book_id", nullable = false)
     private Book book;
 }

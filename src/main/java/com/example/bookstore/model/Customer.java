@@ -1,5 +1,6 @@
 package com.example.bookstore.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.*;
@@ -7,11 +8,12 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-
+@ToString(exclude = "orders")
 public class Customer {
 
     @Id
@@ -28,6 +30,7 @@ public class Customer {
     @NotBlank
     private String address;
 
-    @OneToMany(mappedBy = "customer", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Order> orders;
 }

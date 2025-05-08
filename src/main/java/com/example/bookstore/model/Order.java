@@ -1,5 +1,6 @@
 package com.example.bookstore.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -7,12 +8,13 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Data
+@Table(name = "orders")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name="orders")
-
+@ToString(exclude = {"customer", "items"})
 public class Order {
 
     @Id
@@ -24,9 +26,9 @@ public class Order {
     private Double totalAmount;
 
     @ManyToOne
-    @JoinColumn(name="customer_id", nullable = false)
+    @JoinColumn(name = "customer_id", nullable = false)
     private Customer customer;
 
-    @OneToMany(mappedBy = "order", cascade=CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OrderItem> items;
 }
