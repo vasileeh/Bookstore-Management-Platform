@@ -52,16 +52,16 @@ class OrderServiceTest {
     @Test
     void testGetOrderById() {
         Order order = new Order();
-        order.setId(1L);
-        when(orderRepository.findById(1L)).thenReturn(Optional.of(order));
+        order.setId(7L);
+        when(orderRepository.findById(7L)).thenReturn(Optional.of(order));
 
-        Order result = orderService.getOrderById(1L);
-        assertEquals(1L, result.getId());
+        Order result = orderService.getOrderById(7L);
+        assertEquals(7L, result.getId());
     }
 
     @Test
     void testDeleteOrder() {
-        orderService.deleteOrder(1L);
-        verify(orderRepository).deleteById(1L);
+        orderService.deleteOrder(7L);
+        verify(orderRepository).deleteById(7L);
     }
 }

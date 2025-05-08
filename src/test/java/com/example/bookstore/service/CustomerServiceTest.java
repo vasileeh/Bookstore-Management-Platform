@@ -27,7 +27,7 @@ class CustomerServiceTest {
         MockitoAnnotations.openMocks(this);
 
         customer=new Customer();
-        customer.setId(1L);
+        customer.setId(7L);
         customer.setName("Test Customer");
         customer.setAddress("Test Address");
         customer.setEmail("email@test");
@@ -57,18 +57,18 @@ class CustomerServiceTest {
 
     @Test
     void testGetCustomerById_Found(){
-        when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
+        when(customerRepository.findById(7L)).thenReturn(Optional.of(customer));
 
-        Customer result=customerService.getCustomerById(1L);
+        Customer result=customerService.getCustomerById(7L);
         assertEquals("Test Customer", result.getName());
     }
 
     @Test
     void testGetCustomerById_NotFound(){
-        when(customerRepository.findById(2L)).thenReturn(Optional.empty());
+        when(customerRepository.findById(6L)).thenReturn(Optional.empty());
 
         RuntimeException exception=assertThrows(RuntimeException.class,
-                ()->customerService.getCustomerById(2l));
+                ()->customerService.getCustomerById(6l));
 
         assertEquals("The customer was not found", exception.getMessage());
     }
@@ -90,10 +90,10 @@ class CustomerServiceTest {
         editedCustomer.setAddress("Test Address2");
         editedCustomer.setOrders(new ArrayList<>());
 
-        when(customerRepository.findById(1L)).thenReturn(Optional.of(customer));
+        when(customerRepository.findById(7L)).thenReturn(Optional.of(customer));
         when(customerRepository.save(any(Customer.class))).thenAnswer(i -> i.getArgument(0));
 
-        Customer result = customerService.editCustomer(1L, editedCustomer);
+        Customer result = customerService.editCustomer(7L, editedCustomer);
 
         assertEquals("Test Customer2", result.getName());
         assertEquals("Test Address2", result.getAddress());
@@ -102,11 +102,11 @@ class CustomerServiceTest {
 
     @Test
     void testDeleteCustomer(){
-        doNothing().when(customerRepository).deleteById(1L);
+        doNothing().when(customerRepository).deleteById(7L);
 
-        customerService.deleteCustomer(1L);
+        customerService.deleteCustomer(7L);
 
-        verify(customerRepository, times(1)).deleteById(1L);
+        verify(customerRepository, times(1)).deleteById(7L);
     }
 
 }

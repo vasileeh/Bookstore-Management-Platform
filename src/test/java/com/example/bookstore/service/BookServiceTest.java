@@ -29,21 +29,21 @@ class BookServiceTest {
     @BeforeEach
     void setUp() {
         Author author = Author.builder()
-                .id(1L)
+                .id(7L)
                 .name("Test author")
                 .biography("Some biography")
                 .books(new ArrayList<>())
                 .build();
 
         Genre genre = Genre.builder()
-                .id(1L)
+                .id(7L)
                 .name("Fiction")
                 .description("Fictional books")
                 .books(new ArrayList<>())
                 .build();
 
         book = Book.builder()
-                .id(1L)
+                .id(7L)
                 .title("Test Book")
                 .author(author)
                 .genre(genre)
@@ -66,13 +66,13 @@ class BookServiceTest {
 
     @Test
     void getBookById_existingId_shouldReturnBook() {
-        when(bookRepository.findById(1L)).thenReturn(Optional.of(book));
+        when(bookRepository.findById(7L)).thenReturn(Optional.of(book));
 
-        Book result = bookService.getBookById(1L);
+        Book result = bookService.getBookById(7L);
 
         assertNotNull(result);
-        assertEquals(1L, result.getId());
-        verify(bookRepository).findById(1L);
+        assertEquals(7L, result.getId());
+        verify(bookRepository).findById(7L);
     }
 
     @Test
@@ -86,9 +86,9 @@ class BookServiceTest {
 
     @Test
     void deleteBook_shouldCallDeleteById() {
-        bookService.deleteBook(1L);
+        bookService.deleteBook(7L);
 
-        verify(bookRepository, times(1)).deleteById(1L);
+        verify(bookRepository, times(1)).deleteById(7L);
     }
 
     @Test
@@ -105,7 +105,7 @@ class BookServiceTest {
 
     @Test
     void updateBook_shouldUpdateFields() {
-        when(bookRepository.findById(1L)).thenReturn(Optional.of(book));
+        when(bookRepository.findById(7L)).thenReturn(Optional.of(book));
         when(bookRepository.save(any(Book.class))).thenAnswer(invocation -> invocation.getArgument(0));
 
         Book updatedData = Book.builder()
@@ -116,12 +116,12 @@ class BookServiceTest {
                 .stock(5)
                 .build();
 
-        Book updated = bookService.updateBook(1L, updatedData);
+        Book updated = bookService.updateBook(7L, updatedData);
 
         assertEquals("Updated Title", updated.getTitle());
         assertEquals(49.99, updated.getPrice());
         assertEquals(5, updated.getStock());
-        verify(bookRepository).findById(1L);
+        verify(bookRepository).findById(7L);
         verify(bookRepository).save(any(Book.class));
     }
 }

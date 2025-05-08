@@ -27,7 +27,7 @@ class GenreServiceTest {
         MockitoAnnotations.openMocks(this);
 
         genre=new Genre();
-        genre.setId(1L);
+        genre.setId(7L);
         genre.setName("Test Genre");
         genre.setDescription("Test description");
         genre.setBooks(new ArrayList<>());
@@ -56,19 +56,19 @@ class GenreServiceTest {
 
     @Test
     void testGetGenreById_Found(){
-        when(genreRepository.findById(1L)).thenReturn(Optional.of(genre));
+        when(genreRepository.findById(7L)).thenReturn(Optional.of(genre));
 
-        Genre result=genreService.getGenreById(1L);
+        Genre result=genreService.getGenreById(7L);
 
         assertEquals("Test Genre",result.getName());
     }
 
     @Test
     void testGetGenreById_NotFound(){
-        when(genreRepository.findById(2L)).thenReturn(Optional.empty());
+        when(genreRepository.findById(6L)).thenReturn(Optional.empty());
 
         RuntimeException exception=assertThrows(RuntimeException.class,
-                ()->genreService.getGenreById(2L));
+                ()->genreService.getGenreById(6L));
         assertEquals("The genre was not found",exception.getMessage());
     }
 

@@ -25,7 +25,7 @@ class AuthorServiceTest {
         MockitoAnnotations.openMocks(this);
 
         author = new Author();
-        author.setId(1L);
+        author.setId(7L);
         author.setName("Test Author");
         author.setBiography("Test Biography");
         author.setBooks(new ArrayList<>());
@@ -54,19 +54,19 @@ class AuthorServiceTest {
 
     @Test
     void testGetAuthorById_Found() {
-        when(authorRepository.findById(1L)).thenReturn(Optional.of(author));
+        when(authorRepository.findById(7L)).thenReturn(Optional.of(author));
 
-        Author result = authorService.getAuthorById(1L);
+        Author result = authorService.getAuthorById(7L);
 
             assertEquals("Test Author", result.getName());
     }
 
     @Test
     void testGetAuthorById_NotFound() {
-        when(authorRepository.findById(2L)).thenReturn(Optional.empty());
+        when(authorRepository.findById(6L)).thenReturn(Optional.empty());
 
         RuntimeException exception = assertThrows(RuntimeException.class,
-                () -> authorService.getAuthorById(2L));
+                () -> authorService.getAuthorById(6L));
         assertEquals("The author was not found", exception.getMessage());
     }
 
@@ -86,10 +86,10 @@ class AuthorServiceTest {
         updatedAuthor.setBiography("New biography");
         updatedAuthor.setBooks(new ArrayList<>());
 
-        when(authorRepository.findById(1L)).thenReturn(Optional.of(author));
+        when(authorRepository.findById(7L)).thenReturn(Optional.of(author));
         when(authorRepository.save(any(Author.class))).thenAnswer(i -> i.getArgument(0));
 
-        Author result = authorService.updateAuthor(1L, updatedAuthor);
+        Author result = authorService.updateAuthor(7L, updatedAuthor);
 
         assertEquals("Test Autor2", result.getName());
         assertEquals("New biography", result.getBiography());
@@ -97,10 +97,10 @@ class AuthorServiceTest {
 
     @Test
     void testDeleteAuthor() {
-        doNothing().when(authorRepository).deleteById(1L);
+        doNothing().when(authorRepository).deleteById(7L);
 
-        authorService.deleteAuthor(1L);
+        authorService.deleteAuthor(7L);
 
-        verify(authorRepository, times(1)).deleteById(1L);
+        verify(authorRepository, times(1)).deleteById(7L);
     }
 }
