@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add a New Book</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background: #f9f9f9;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<h1>Add a New Book</h1>
+
+<form action="/books/add" method="post">
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title" required />
+
+    <label for="author">Author</label>
+    <input type="text" id="author" name="author" required />
+
+    <label for="genre">Genre</label>
+    <input type="text" id="genre" name="genre" required />
+
+    <label for="price">Price</label>
+    <input type="number" id="price" name="price" required />
+
+    <label for="stock">Stock</label>
+    <input type="number" id="stock" name="stock" required />
+
+    <button type="submit">Add Book</button>
+</form>
+
+</body>
+</html>

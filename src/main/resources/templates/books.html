@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Available Books</title>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 30px;
+            background: #f9f9f9;
+        }
+        h1 {
+            color: #333;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 25px;
+        }
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #eee;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<h1>Book Catalog</h1>
+
+<form action="/books" method="get">
+    <label for="filter">Filter by:</label>
+    <select name="filter" id="filter">
+        <option value="genre">Genre</option>
+        <option value="title">Title</option>
+        <option value="author">Author</option>
+    </select>
+    <input type="text" name="filterValue" placeholder="Filter value" required />
+    <button type="submit">Filter</button>
+</form>
+
+<a href="/books/add">Add a new book</a>
+
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Genre</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="book : ${books}">
+        <td th:text="${book.title}">Title</td>
+        <td th:text="${book.author.name}">Author</td>
+        <td th:text="${book.genre.name}">Genre</td>
+        <td th:text="${book.price}">0.0</td>
+        <td th:text="${book.stock}">0</td>
+        <td>
+            <form th:action="@{/books/delete/{id}(id=${book.id})}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
