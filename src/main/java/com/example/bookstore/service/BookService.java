@@ -26,6 +26,21 @@ public class BookService {
                 .orElseThrow(()->new RuntimeException("The book was not found"));
     }
 
+    public void addBook(Book book) {
+        bookRepository.save(book);
+    }
+
+    public List<Book> filterBooks(String filter, String filterValue) {
+        switch (filter) {
+            case "genre":
+                return bookRepository.findByGenreName(filterValue);
+            case "title":
+                return bookRepository.findByTitleContainingIgnoreCase(filterValue);
+            default:
+                return getAllBooks();
+        }
+    }
+
     public Book updateBook(Long id, Book updateBook){
         Book existing=getBookById(id);
         existing.setTitle(updateBook.getTitle());
